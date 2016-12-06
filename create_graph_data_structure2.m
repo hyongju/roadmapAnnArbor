@@ -64,17 +64,17 @@
 %     end
 % end
 clear all; close all;clc
-load('neib_no_dupe_dec_2.mat');
-Elist = [];
-for i = 1:size(neib_no_dupe,2)
-    i
-    for j = 1:size(neib_no_dupe{i},1)
-        if size(neib_no_dupe{i},2) == 4 && neib_no_dupe{i}(j,3) > 0
-            Elist = [Elist;i neib_no_dupe{i}(j,3) neib_no_dupe{i}(j,4)];
-        end
-    end
-end
-e_list = [Elist; Elist(:,2) Elist(:,1) Elist(:,3)];
+load('graphs_v_e_dec_2.mat');
+% Elist = [];
+% for i = 1:size(neib_no_dupe,2)
+%     i
+%     for j = 1:size(neib_no_dupe{i},1)
+%         if size(neib_no_dupe{i},2) == 4 && neib_no_dupe{i}(j,3) > 0
+%             Elist = [Elist;i neib_no_dupe{i}(j,3) neib_no_dupe{i}(j,4)];
+%         end
+%     end
+% end
+% e_list = [Elist; Elist(:,2) Elist(:,1) Elist(:,3)];
 SID = 10000;
 FID = 20000;
 [costs,paths] = dijkstra(v_list,e_list,SID,FID);
@@ -92,6 +92,7 @@ for i = 1:1000
 plot(plt(:,1),plt(:,2),'k-');
 hold on;
 end
+
 
 % Adj = zeros(size(neib_no_dupe,2),size(neib_no_dupe,2));
 % for i = 1:size(neib_no_dupe,2)
@@ -146,3 +147,10 @@ end
 % v_list2 = v_list(2:size(v_list,1),:);
 % clear v_list;
 % v_list = v_list2;
+
+
+idx= randsample(1:size(v_list,1),10);
+pos = v_list(idx,:);
+figure,
+plot(pos(:,1),pos(:,2),'*');
+
